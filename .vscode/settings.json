@@ -1,0 +1,11 @@
+{
+    "sqltools.useNodeRuntime": true,
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "Local",
+            "database": "${workspaceFolder:fastapi_practise}/data/spendings.db"
+        }
+    ]
+}
