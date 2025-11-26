@@ -4,9 +4,9 @@ import os
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 
-from config.settings import Settings, get_settings
+from config.settings import get_settings
 from data import DB_PATH, create_table
-from seed_data import generate_mock_data
+from data.seed_data import generate_mock_data
 
 
 def get_db():
