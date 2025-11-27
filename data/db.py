@@ -1,4 +1,23 @@
-# db.py
+"""
+Database Layer
+
+This module provides:
+
+1. get_db()
+    - Yields a per-request SQLite connection
+    - Ensures that every request gets its own connection
+    - Closes connection automatically after use
+
+2. lifespan()
+    - Executed once when the FastAPI app starts
+    - Ensures database file exists
+    - Creates required tables
+    - Seeds the database (optional)
+    - Closes out at shutdown
+
+These are not shown in Swagger because they are infrastructure.
+"""
+
 import sqlite3
 import os
 from contextlib import asynccontextmanager

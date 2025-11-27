@@ -1,4 +1,21 @@
-# services/recommender.py
+"""
+RecommenderService
+
+A very simple SQL-based recommender algorithm.
+
+Current Logic:
+- For each user, count how many times they used each merchant
+- Select the merchant with the highest usage
+- Return that merchant_id
+
+Limitations:
+- No ranking
+- No ML
+- No similarity scoring
+- No embeddings
+- No collaborative filtering
+"""
+
 import sqlite3
 
 RECOMMENDATION_QUERY = """

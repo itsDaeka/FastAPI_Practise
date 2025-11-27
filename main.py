@@ -1,5 +1,22 @@
+"""
+Main Application Entry Point
 
-# main.py
+This file:
+
+- Creates the FastAPI app
+- Configures middleware (request timing)
+- Includes all routers
+- Loads lifespan() for DB initialization
+- Provides a clean modular structure
+
+Routers included:
+- health_router
+- user_router
+- spending_router
+- matrix_router
+- recommendation_router
+"""
+
 import time
 import logging
 

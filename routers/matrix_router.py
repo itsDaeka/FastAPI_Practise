@@ -1,4 +1,5 @@
 # routers/matrix_router.py
+
 from fastapi import APIRouter, Depends
 import sqlite3
 from data.db import get_db
@@ -7,19 +8,34 @@ router = APIRouter(
     tags=["matrix"]
 )
 
-@router.get("/matrix_properties")
-def get_matrix(db: sqlite3.Connection = Depends(get_db)):
-    cursor = db.cursor()
-    cursor.execute("SELECT COUNT(DISTINCT user_id) as users FROM spendings")
-    row_users = cursor.fetchone()
-    users_nb = row_users["users"] if row_users else 0
+@router.get(
+    "/matrix_properties",
+    summary="Get the shape of the user–merchant matrix",
+    description="""
+Returns information about the implicit **user × merchant** spending matrix.
 
-    cursor.execute("SELECT COUNT(DISTINCT merchant_id) as merchants FROM spendings")
-    row_merchants = cursor.fetchone()
-    merchants_nb = row_merchants["merchants"] if row_merchants else 0
-    
+### Logic
+- Counts distinct users  
+- Counts distinct merchants  
+- Returns the matrix dimension (`rows × columns`)  
+
+### Responses
+- **200 OK** – matrix dimension returned successfully  
+""",
+)
+def matrix_properties(db: sqlite3.Connection = Depends(get_db)):
+    cursor = db.cursor()
+
+    users_nb = cursor.execute(
+        "SELECT COUNT(DISTINCT user_id) FROM spendings"
+    ).fetchone()[0]
+
+    merchants_nb = cursor.execute(
+        "SELECT COUNT(DISTINCT merchant_id) FROM spendings"
+    ).fetchone()[0]
+
     return {
-        "rows": users_nb, 
+        "rows": users_nb,
         "cols": merchants_nb,
-        "note": "Number of rows correspond to number of users, and columns correspond to number of merchants."
+        "note": "Rows = users, Columns = merchants"
     }
