@@ -13,9 +13,12 @@ FROM (
         LIMIT 1
     )
 )
-WHERE user_id = 1;
+WHERE user_id = 54;
 
-
-SELECT user_id, merchant_id, COUNT(*) AS transaction_count
-FROM spendings
-GROUP BY user_id, merchant_id
+SELECT user_id, merchant_id, MAX(transaction_count)
+FROM (
+    SELECT user_id, merchant_id, COUNT(*) AS transaction_count
+    FROM spendings
+    GROUP BY user_id, merchant_id
+)
+GROUP BY user_id

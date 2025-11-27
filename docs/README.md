@@ -63,7 +63,7 @@ FastAPI Application
 
 From the project root:
 
-"""text
+~~~text
 fastapi_practise/
 ├── main.py                 # FastAPI app entrypoint (logging, routers, lifespan)
 ├── config/
@@ -90,7 +90,7 @@ fastapi_practise/
 ├── .dockerignore           # Docker build context exclusions (recommended name)
 ├── requirements.txt        # Python dependencies
 └── .env                    # Local environment configuration
-"""
+~~~
 
 > Note: Ensure `.dockerigore` is renamed to `.dockerignore` so Docker can use it.
 
